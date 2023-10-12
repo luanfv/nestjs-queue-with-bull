@@ -1,12 +1,13 @@
 import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+
+import { BasicQueueProducer } from './jobs/basic-queue/basic-queue.producer';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly basicQueueProducer: BasicQueueProducer) {}
 
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  async getHello(): Promise<void> {
+    await this.basicQueueProducer.helloBull();
   }
 }

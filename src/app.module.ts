@@ -3,8 +3,9 @@ import { BullModule } from '@nestjs/bull';
 import { BullBoardModule } from '@bull-board/nestjs';
 import { ExpressAdapter } from '@bull-board/express';
 
-import { QueuesModule } from './queues/basic-queue.module';
+import { QueuesModule } from './queues/queues.module';
 import { UsersModule } from './users/users.module';
+import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { UsersModule } from './users/users.module';
     }),
     QueuesModule,
     UsersModule,
+    PrismaModule,
   ],
 })
 export class AppModule {}

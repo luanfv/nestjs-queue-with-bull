@@ -6,3 +6,13 @@ services:
     container_name: redis-queues
     ports:
       - '6379:6379'
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres-users
+    environment:
+      POSTGRES_DB: users
+      POSTGRES_USER: queue
+      POSTGRES_PASSWORD: abc
+    ports:
+      - '5432:5432'

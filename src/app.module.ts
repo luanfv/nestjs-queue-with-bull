@@ -1,5 +1,8 @@
 import { Module } from '@nestjs/common';
 import { BullModule } from '@nestjs/bull';
+import { BullBoardModule } from '@bull-board/nestjs';
+import { ExpressAdapter } from '@bull-board/express';
+import { BullAdapter } from '@bull-board/api/bullAdapter';
 
 import { AppController } from './app.controller';
 import { BasicQueueFirstConsumer } from './jobs/basic-queue/baisc-queue-first.consumer';
@@ -17,6 +20,14 @@ import { BasicQueueSecondaryConsumer } from './jobs/basic-queue/baisc-queue-seco
     }),
     BullModule.registerQueue({
       name: BASIC_QUEUE_KEY,
+    }),
+    BullBoardModule.forFeature({
+      name: BASIC_QUEUE_KEY,
+      adapter: BullAdapter,
+    }),
+    BullBoardModule.forRoot({
+      route: '/admin/queues',
+      adapter: ExpressAdapter,
     }),
   ],
   controllers: [AppController],
